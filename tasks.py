@@ -3,7 +3,7 @@ from typing import Tuple
 from exceptions import TaskException
 
 
-def task1(x: [float, int], y: [float, int]) -> int:
+def task1(x: [float, int], y: [float, int]) -> [float, int]:
     """
     Даны действительные числа x и y.
     Вернуть (|x| − |y|) / (1+ |xy|)
@@ -24,7 +24,7 @@ def task2(a: [float, int]) -> tuple[[float, int], [float, int]]:
     return v, s
 
 
-def task3(a: [float, int], b: [float, int]) -> int:
+def task3(a: [float, int], b: [float, int]) -> [float, int]:
     """
     Даны два катета прямоугольного треугольника.
     Вернуть длину гипотенузы.
