@@ -266,9 +266,23 @@ def perfect_square(square: str) -> bool:
     included.sort()
     unique.sort()
 
-    if included == unique or included2 == unique:
-        if list(square) == list(square)[::-1]:
+    if included == unique:
+        correct = True
+        for i in square.split('\n'):
+            if len(i) == len(square.split('\n')):
+                correct = True
+            else:
+                correct = False
+                break
+        if correct:
             return True
+        else:
+            return False
+    elif included2 == unique:
+        if len(included2) == len(square):
+            return True
+        else:
+            return False
     else:
         return False
 
