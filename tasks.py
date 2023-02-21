@@ -11,7 +11,7 @@ def task1(x: [float, int], y: [float, int]) -> int:
     return (abs(x) - abs(y)) / (1 + abs(x * y))
 
 
-def task2(a: [float, int]) -> tuple[int, int]:
+def task2(a: [float, int]) -> tuple[[float, int], [float, int]]:
     """
     Дана длина ребра куба.
     Вернуть кортеж с объемом куба и площадью его боковой поверхности.
