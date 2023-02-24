@@ -1,3 +1,4 @@
 .idea
 .env3
 .pytest_cache
+__pycache__
