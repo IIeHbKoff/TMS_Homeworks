@@ -8,7 +8,7 @@ def task1(x: [float, int], y: [float, int]) -> int:
     Даны действительные числа x и y.
     Вернуть (|x| − |y|) / (1+ |xy|)
     """
-    return (x - y) / (1 + (x * y))
+    return (abs(x) - abs(y)) / (1 + abs(x * y))
 
 
 def task2(a: [float, int]) -> tuple[int, int]:
@@ -16,9 +16,12 @@ def task2(a: [float, int]) -> tuple[int, int]:
     Дана длина ребра куба.
     Вернуть кортеж с объемом куба и площадью его боковой поверхности.
     """
-    v = a ** 3
-    s = (4 * a ** 2)/4
-    return (v, s)
+    if a < 0:
+        raise TaskException("Sorry, no numbers below zero")
+    else:
+        v = a ** 3
+        s = (4 * a ** 2)/4
+    return v, s
 
 
 def task3(a: [float, int], b: [float, int]) -> int:
@@ -26,6 +29,8 @@ def task3(a: [float, int], b: [float, int]) -> int:
     Даны два катета прямоугольного треугольника.
     Вернуть длину гипотенузы.
     """
+    if a <= 0 and b <= 0:
+        raise TaskException("Sorry, no numbers below zero")
     return (a ** 2 + b ** 2) ** 0.5
 
 
@@ -94,7 +99,7 @@ def task10(string: str) -> tuple[str, str | None]:
     srez = None
     if string[0] == string[meridian]:
         srez = string[1:-1]
-    return tuple(string[meridian], srez)
+    return string[meridian], srez
 
 
 def task11(string: str) -> bool:
@@ -135,12 +140,15 @@ def task14(guests_count: int) -> str:
     Если их будет больше 50 - закажут ресторан, если от 20 до 50 - кафе, а если меньше 20 - отпразднуют дома.
     Вернуть "ресторан", "кафе", "дом" в зависимости от количества гостей.
     """
-    if guests_count > 50:
-        return "ресторан"
-    elif 20 <= guests_count <= 50:
-        return "кафе"
-    elif guests_count < 20:
-        return "дом"
+    if guests_count <= 0:
+        raise TaskException("Sorry, no numbers below zero")
+    else:
+        if guests_count > 50:
+            return "ресторан"
+        elif 20 <= guests_count <= 50:
+            return "кафе"
+        elif guests_count < 20:
+            return "дом"
 
 
 def micro_calc(a: [float, int], b: [float, int], sign: str) -> [float, int, str]:
@@ -149,7 +157,9 @@ def micro_calc(a: [float, int], b: [float, int], sign: str) -> [float, int, str]
     Необходимо вернуть результат арифметической операции
     В случае ошибки вычислений или неизвестного знака вернуть строку "error"
     """
-    try:
+    if a <= 0 or b <= 0:
+        raise TaskException("Sorry, no numbers below zero")
+    else:
         if sign == '+':
             return a + b
         elif sign == '-':
@@ -160,8 +170,8 @@ def micro_calc(a: [float, int], b: [float, int], sign: str) -> [float, int, str]
             return a * b
         elif sign == '^':
             return a ** b
-    except ZeroDivisionError:
-        return 'error'
+        else:
+            raise TaskException("Sorry, no numbers below zero")
 
 
 def big_letters(phrase: str) -> str:
