@@ -6,6 +6,7 @@ def task1(x: [float, int], y: [float, int]) -> [float, int]:
     Даны действительные числа x и y.
     Вернуть (|x| − |y|) / (1+ |xy|)
     """
+    return (abs(x) - abs(y)) / (1 + abs(x * y))
 
 
 def task2(a: [float, int]) -> tuple[[float, int], [float, int]]:
@@ -13,6 +14,10 @@ def task2(a: [float, int]) -> tuple[[float, int], [float, int]]:
     Дана длина ребра куба.
     Вернуть кортеж с объемом куба и площадью его боковой поверхности.
     """
+    if a > 0:
+        return a ** 3, a ** 2
+    else:
+        raise TaskException
 
 
 def task3(a: [float, int], b: [float, int]) -> [float, int]:
@@ -20,6 +25,10 @@ def task3(a: [float, int], b: [float, int]) -> [float, int]:
     Даны два катета прямоугольного треугольника.
     Вернуть длину гипотенузы.
     """
+    if a > 0 and b > 0:
+        return pow((pow(a, 2) + pow(b, 2)), 1/2)
+    else:
+        raise TaskException
 
 
 def task4(string: str) -> str:
@@ -27,6 +36,7 @@ def task4(string: str) -> str:
     На вход подаётся строка.
     Вернуть строку равную предпоследнему символу введенной строки.
     """
+    return string[-2]
 
 
 def task5(string: str) -> str:
@@ -34,6 +44,7 @@ def task5(string: str) -> str:
     На вход подаётся строка.
     Вернуть строку равную первым пяти символам введенной строки.
     """
+    return string[:5]
 
 
 def task6(string: str) -> str:
@@ -41,6 +52,7 @@ def task6(string: str) -> str:
     На вход подаётся строка.
     Вернуть строку равную введенной строку без последних двух символов.
     """
+    return string[:-2]
 
 
 def task7(string: str) -> str:
@@ -48,6 +60,7 @@ def task7(string: str) -> str:
     На вход подаётся строка.
     Вернуть строку равную всем элементам введенной строки с четными индексами.
     """
+    return string[::2]
 
 
 def task8(string: str) -> str:
@@ -55,6 +68,7 @@ def task8(string: str) -> str:
     На вход подаётся строка.
     Вернуть строку равную третьему символу введенной строки.
     """
+    return string[2]
 
 
 def task9(string: str) -> str:
@@ -63,6 +77,10 @@ def task9(string: str) -> str:
     с 3 восклицательными знаками в конце ('!!!') и вывести на экран.
     Если меньше 10, то вывести на экран второй символ строки
     """
+    if len(string) > 10:
+        return string + "!!!"
+    else:
+        return string[1]
 
 
 def task10(string: str) -> tuple[str, [None, str]]:
@@ -73,6 +91,10 @@ def task10(string: str) -> tuple[str, [None, str]]:
     (подсказка: для получения центральной буквы, найдите длину строки и разделите ее пополам.
     Для создания результирующий строки используйте срез)
     """
+    if string[len(string) // 2] == string[0]:
+        return string[len(string) // 2], string[1:-1]
+    else:
+        return string[len(string) // 2], None
 
 
 def task11(string: str) -> bool:
@@ -80,18 +102,31 @@ def task11(string: str) -> bool:
     Напишите функцию которая проверяет является ли строка палиндромом.
     Палиндром — это слово или фраза, которые одинаково читаются слева направо и справа налево.
     """
+    if string == string[::-1]:
+        return True
+    else:
+        return False
 
 
 def task12(string: str, symbol: str) -> int:
     """
     Напишите функцию которая возвращает сколько раз символ встречается в строке
     """
+    res = 0
+    for x in string:
+        if x == symbol:
+            res = res + 1
+    return res
 
 
 def task13(number: int) -> bool:
     """
     Дано число. Если это число делится на 1000 без остатка, то верните True иначе False
     """
+    if number % 1000 == 0:
+        return True
+    else:
+        return False
 
 
 def task14(guests_count: int) -> str:
@@ -100,6 +135,14 @@ def task14(guests_count: int) -> str:
     Если их будет больше 50 - закажут ресторан, если от 20 до 50 - кафе, а если меньше 20 - отпразднуют дома.
     Вернуть "ресторан", "кафе", "дом" в зависимости от количества гостей.
     """
+    if guests_count > 50:
+        return "ресторан"
+    elif 20 <= guests_count <= 50:
+        return "кафе"
+    elif guests_count < 20:
+        return "дом"
+    else:
+        raise TaskException
 
 
 def task15(number: int) -> tuple[int, int]:
@@ -148,6 +191,18 @@ def micro_calc(a: [float, int], b: [float, int], sign: str) -> [float, int, str]
     Необходимо вернуть результат арифметической операции
     В случае ошибки вычислений или неизвестного знака вернуть строку "error"
     """
+    if sign == "+":
+        return a + b
+    elif sign == "-":
+        return a - b
+    elif sign == ":" and b != 0:
+        return a / b
+    elif sign == "*":
+        return a * b
+    elif sign == "^":
+        return a ** b
+    else:
+        raise TaskException
 
 
 def big_letters(phrase: str) -> str:
@@ -192,6 +247,17 @@ def perfect_square(square: str) -> bool:
      - Правильные квадраты могут содержать только '.' и необязательно '\n' (перевод строки).
      - Идеальные квадраты должны иметь одинаковую ширину и высоту.
     """
+    lines = 0
+    for i in square:
+        lines += 1
+        if len(square) == lines:
+            return True
+        else:
+            return False
+# if len(square) == square.count("\n") - 1 or len(square) == 1:
+#     return True
+# else:
+#     return False
 
 
 def task_with_square_brackets(string_input: str) -> str:
