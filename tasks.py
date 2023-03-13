@@ -6,6 +6,7 @@ def task1(x: [float, int], y: [float, int]) -> [float, int]:
     Даны действительные числа x и y.
     Вернуть (|x| − |y|) / (1+ |xy|)
     """
+    return (abs(x) - abs(y)) / (1 + abs(x * y))
 
 
 def task2(a: [float, int]) -> tuple[[float, int], [float, int]]:
@@ -13,13 +14,18 @@ def task2(a: [float, int]) -> tuple[[float, int], [float, int]]:
     Дана длина ребра куба.
     Вернуть кортеж с объемом куба и площадью его боковой поверхности.
     """
-
+    if a < 0:
+        raise TaskException
+    return a ** 3, a ** 2
 
 def task3(a: [float, int], b: [float, int]) -> [float, int]:
     """
     Даны два катета прямоугольного треугольника.
     Вернуть длину гипотенузы.
     """
+    if a < 0 or b < 0:
+        raise TaskException
+    return (a ** 2 + b ** 2) ** 0.5
 
 
 def task4(string: str) -> str:
@@ -27,6 +33,7 @@ def task4(string: str) -> str:
     На вход подаётся строка.
     Вернуть строку равную предпоследнему символу введенной строки.
     """
+    return string[-2]
 
 
 def task5(string: str) -> str:
@@ -34,6 +41,7 @@ def task5(string: str) -> str:
     На вход подаётся строка.
     Вернуть строку равную первым пяти символам введенной строки.
     """
+    return string[0:5]
 
 
 def task6(string: str) -> str:
@@ -41,6 +49,7 @@ def task6(string: str) -> str:
     На вход подаётся строка.
     Вернуть строку равную введенной строку без последних двух символов.
     """
+    return string[0:-2]
 
 
 def task7(string: str) -> str:
@@ -48,6 +57,7 @@ def task7(string: str) -> str:
     На вход подаётся строка.
     Вернуть строку равную всем элементам введенной строки с четными индексами.
     """
+    return string[:: 2]
 
 
 def task8(string: str) -> str:
@@ -55,6 +65,7 @@ def task8(string: str) -> str:
     На вход подаётся строка.
     Вернуть строку равную третьему символу введенной строки.
     """
+    return string[2]
 
 
 def task9(string: str) -> str:
@@ -63,6 +74,13 @@ def task9(string: str) -> str:
     с 3 восклицательными знаками в конце ('!!!') и вывести на экран.
     Если меньше 10, то вывести на экран второй символ строки
     """
+    if len(string) > 10:
+        string += ("!!!")
+    else:
+        string = string[1]
+    return string
+
+
 
 
 def task10(string: str) -> tuple[str, [None, str]]:
@@ -73,6 +91,10 @@ def task10(string: str) -> tuple[str, [None, str]]:
     (подсказка: для получения центральной буквы, найдите длину строки и разделите ее пополам.
     Для создания результирующий строки используйте срез)
     """
+    if string[len(string)//2] == string[0]:
+        return string[0], string[1:-1]
+    else:
+        return string[len(string)//2], None
 
 
 def task11(string: str) -> bool:
